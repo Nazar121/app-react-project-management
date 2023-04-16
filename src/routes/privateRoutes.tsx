@@ -5,16 +5,21 @@ import { Routes, Route, RouteProps, Navigate } from 'react-router-dom';
 import { AuthLayout } from '@layouts/index';
 
 // Pages
-import { LoginPage } from '@pages/index';
+import { LoginPage, RegisterPage } from '@pages/index';
 
 export const ROUTES_PRIVATE = {
   LOGIN: '/login',
+  REGISTER: 'register',
 };
 
 const privateRoutes: RouteProps[] = [
   {
     path: ROUTES_PRIVATE.LOGIN,
     element: <LoginPage />,
+  },
+  {
+    path: ROUTES_PRIVATE.REGISTER,
+    element: <RegisterPage />,
   },
 ];
 
