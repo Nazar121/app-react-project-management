@@ -1,5 +1,5 @@
-import React from "react";
-import { Routes, Route, RouteProps } from "react-router-dom";
+import React from 'react';
+import { Routes, Route, RouteProps } from 'react-router-dom';
 
 export const ROUTES_PUBLIC = {};
 

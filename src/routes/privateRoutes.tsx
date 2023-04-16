@@ -1,14 +1,14 @@
-import React from "react";
-import { Routes, Route, RouteProps, Navigate } from "react-router-dom";
+import React from 'react';
+import { Routes, Route, RouteProps, Navigate } from 'react-router-dom';
 
 // Layouts
-import { AuthLayout } from "../components/layouts/AuthLayout/AuthLayout";
+import { AuthLayout } from '../components/layouts/AuthLayout/AuthLayout';
 
 // Pages
-import Login from "../pages/Login";
+import Login from '../pages/Login';
 
 export const ROUTES_PRIVATE = {
-  LOGIN: "/login",
+  LOGIN: '/login',
 };
 
 const privateRoutes: RouteProps[] = [
@@ -27,14 +27,8 @@ export const PrivateRoutes = () => {
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
 
-          <Route
-            path="/"
-            element={<Navigate to={ROUTES_PRIVATE.LOGIN} replace />}
-          />
-          <Route
-            path="*"
-            element={<Navigate to={ROUTES_PRIVATE.LOGIN} replace />}
-          />
+          <Route path="/" element={<Navigate to={ROUTES_PRIVATE.LOGIN} replace />} />
+          <Route path="*" element={<Navigate to={ROUTES_PRIVATE.LOGIN} replace />} />
         </Route>
       </Routes>
     </>
