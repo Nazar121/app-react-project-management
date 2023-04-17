@@ -1,0 +1,17 @@
+.authLayout {
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
+  background: url('../../assets/images/auth/auth-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-origin: border-box;
+  background-repeat: no-repeat;
+
+  .main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

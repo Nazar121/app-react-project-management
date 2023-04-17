@@ -9,7 +9,7 @@ import { LoginPage, RegisterPage } from '@pages/index';
 
 export const ROUTES_PRIVATE = {
   LOGIN: '/login',
-  REGISTER: 'register',
+  REGISTER: '/register',
 };
 
 const privateRoutes: RouteProps[] = [

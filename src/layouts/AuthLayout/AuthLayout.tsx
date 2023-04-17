@@ -1,13 +1,16 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-// import classes from './AuthLayout.module.scss';
+import styles from './AuthLayout.module.scss';
+
+// - Components
+import { AuthHeader } from '@components/index';
 
 export const AuthLayout = () => {
   return (
-    <div>
-      <h1>AuthLayout</h1>
+    <div className={styles.authLayout}>
+      <AuthHeader></AuthHeader>
 
-      <main>
+      <main className={styles.main}>
         <Outlet></Outlet>
       </main>
     </div>
