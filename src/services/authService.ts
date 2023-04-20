@@ -20,6 +20,10 @@ const loginUser = async (data: AuthForm) => {
   return signInWithEmailAndPassword(auth, data?.email, data?.password);
 };
 
+const logout = () => {
+  removeAuthUserFromLS();
+};
+
 const setAuthUserToLS = (authUser: AuthUser | null): void => {
   localStorage.setItem(AUTH_USER_KEY, JSON.stringify(authUser));
 };
@@ -36,6 +40,7 @@ const removeAuthUserFromLS = (): void => {
 export const AuthService = {
   registerUser,
   loginUser,
+  logout,
   setAuthUserToLS,
   getAuthUserFromLS,
   removeAuthUserFromLS,
