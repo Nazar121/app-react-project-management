@@ -8,32 +8,36 @@ import { yupResolver } from '@hookform/resolvers/yup';
 // - Components
 import { ControlledTextField, CustomButton } from '@components/index';
 
-interface FormData {
-  email: string;
-  password: string;
-}
+// - Redux
+import { registerUser } from '@src/store/auth/authSlice';
+import { useDispatch } from 'react-redux';
+
+// _ Interfaces
+import { AuthForm } from '@interfaces/auth';
 
 export const RegisterPage = () => {
+  const dispatch = useDispatch();
+
   const schema = Yup.object().shape({
     email: Yup.string().label('Email').trim().required().email(),
-    password: Yup.string().label('Password').trim().required().min(4).max(8),
+    password: Yup.string().label('Password').trim().required().min(6).max(8),
   });
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>({
+  } = useForm<AuthForm>({
     mode: 'all',
     defaultValues: {
-      email: '',
-      password: '',
+      email: 'user2@gmail.com',
+      password: '111111',
     },
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const onSubmit = async (data: AuthForm) => {
+    dispatch(registerUser(data) as any);
   };
 
   return (
