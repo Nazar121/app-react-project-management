@@ -30,8 +30,8 @@ export const RegisterPage = () => {
   } = useForm<AuthForm>({
     mode: 'all',
     defaultValues: {
-      email: 'user2@gmail.com',
-      password: '111111',
+      email: '',
+      password: '',
     },
     resolver: yupResolver(schema),
   });

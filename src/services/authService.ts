@@ -1,4 +1,4 @@
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 // - Interfaces
 import { AuthUser, AuthForm } from '@interfaces/auth';
@@ -11,6 +11,13 @@ const registerUser = async (data: AuthForm) => {
 
   const auth = getAuth();
   return createUserWithEmailAndPassword(auth, data?.email, data?.password);
+};
+
+const loginUser = async (data: AuthForm) => {
+  if (!data || !data?.email || !data?.password) return Promise.reject('Invalid data');
+
+  const auth = getAuth();
+  return signInWithEmailAndPassword(auth, data?.email, data?.password);
 };
 
 const setAuthUserToLS = (authUser: AuthUser | null): void => {
@@ -28,6 +35,7 @@ const removeAuthUserFromLS = (): void => {
 
 export const AuthService = {
   registerUser,
+  loginUser,
   setAuthUserToLS,
   getAuthUserFromLS,
   removeAuthUserFromLS,

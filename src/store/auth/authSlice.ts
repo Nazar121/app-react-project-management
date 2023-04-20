@@ -25,6 +25,16 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (data: A
   }
 });
 
+export const loginUser = createAsyncThunk('auth/loginUser', async (data: AuthForm, thunkAPI): Promise<AuthUser | any> => {
+  try {
+    const userCredential = await AuthService.loginUser(data);
+    return { id: userCredential?.user?.uid };
+  } catch (error) {
+    const errorMessage = error instanceof FirebaseError ? error?.message : 'Error registration user';
+    return thunkAPI.rejectWithValue(errorMessage);
+  }
+});
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -42,6 +52,25 @@ export const authSlice = createSlice({
         AuthService.setAuthUserToLS(state.authUser);
       })
       .addCase(registerUser.rejected, (state, action: PayloadAction<unknown>) => {
+        state.authUser = null;
+        state.isLoading = false;
+        state.error = String(action.payload);
+
+        AuthService.setAuthUserToLS(state.authUser);
+      });
+
+    builder
+      .addCase(loginUser.pending, (state, action: PayloadAction<unknown>) => {
+        state.isLoading = true;
+      })
+      .addCase(loginUser.fulfilled, (state, action: PayloadAction<AuthUser>) => {
+        state.authUser = action?.payload;
+        state.isLoading = false;
+        state.error = '';
+
+        AuthService.setAuthUserToLS(state.authUser);
+      })
+      .addCase(loginUser.rejected, (state, action: PayloadAction<unknown>) => {
         state.authUser = null;
         state.isLoading = false;
         state.error = String(action.payload);
