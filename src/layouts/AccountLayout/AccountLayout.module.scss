@@ -1,0 +1,11 @@
+.account_layout {
+  min-height: inherit;
+  display: flex;
+
+  .sidenav {
+  }
+
+  .main {
+    flex: 1;
+  }
+}

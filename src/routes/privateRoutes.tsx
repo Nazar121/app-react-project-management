@@ -1,6 +1,9 @@
 import React from 'react';
 import { Routes, Route, RouteProps, Navigate } from 'react-router-dom';
 
+// - Layouts
+import { AccountLayout } from '@layouts/index';
+
 // - Pages
 import { DashboardPage } from '@pages/index';
 
@@ -19,12 +22,14 @@ export const PrivateRoutes = () => {
   return (
     <>
       <Routes>
-        {privateRoutes.map((route: RouteProps) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
+        <Route path="/" element={<AccountLayout />}>
+          {privateRoutes.map((route: RouteProps) => (
+            <Route key={route.path} path={route.path} element={route.element} />
+          ))}
 
-        <Route path="/" element={<Navigate to={ROUTES_PRIVATE.DASHBOARD} replace />} />
-        <Route path="*" element={<Navigate to={ROUTES_PRIVATE.DASHBOARD} replace />} />
+          <Route path="/" element={<Navigate to={ROUTES_PRIVATE.DASHBOARD} replace />} />
+          <Route path="*" element={<Navigate to={ROUTES_PRIVATE.DASHBOARD} replace />} />
+        </Route>
       </Routes>
     </>
   );
