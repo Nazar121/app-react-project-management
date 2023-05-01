@@ -1,8 +1,12 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 // - MUI
 import { Avatar, Divider, IconButton, ListItemIcon, Menu, MenuItem, Tooltip } from '@mui/material';
-import { Logout, Settings, Person } from '@mui/icons-material';
+import { Logout, Settings } from '@mui/icons-material';
+
+// - Routes
+import { ROUTES } from '@routes/index';
 
 // - Hooks
 import { useReduxActions } from '@hooks/index';
@@ -22,12 +26,14 @@ export const AccountHeaderMenu = () => {
       </Tooltip>
 
       <Menu sx={{ mt: '45px' }} id="menu-appbar" anchorEl={anchorEl} keepMounted anchorOrigin={{ vertical: 'top', horizontal: 'right' }} transformOrigin={{ vertical: 'top', horizontal: 'right' }} open={Boolean(anchorEl)} onClose={handleClose}>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
+        <NavLink to={ROUTES.SETTINGS}>
+          <MenuItem onClick={handleClose}>
+            <ListItemIcon>
+              <Settings fontSize="small" />
+            </ListItemIcon>
+            Settings
+          </MenuItem>
+        </NavLink>
 
         <Divider />
 

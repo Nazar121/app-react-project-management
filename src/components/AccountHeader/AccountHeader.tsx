@@ -26,7 +26,7 @@ export const AccountHeader = (props: Props) => {
           <MenuIcon />
         </IconButton>
 
-        <div style={{ flexGrow: 1 }}>Responsive drawer</div>
+        <div style={{ flexGrow: 1 }}></div>
 
         <AccountHeaderMenu></AccountHeaderMenu>
       </Toolbar>

@@ -1,8 +1,12 @@
 import React, { Dispatch, SetStateAction } from 'react';
+import { NavLink } from 'react-router-dom';
 
 // - MUI
 import { AppBar, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from '@mui/material';
 import { Dashboard, Settings } from '@mui/icons-material';
+
+// - Routes
+import { ROUTES } from '@routes/index';
 
 // - Hooks
 import { useWindowDimensions } from '@hooks/index';
@@ -49,23 +53,27 @@ export const AccountSidenav = (props: Props) => {
       <Divider />
 
       <List>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <Dashboard />
-            </ListItemIcon>
-            <ListItemText>Dashboard</ListItemText>
-          </ListItemButton>
-        </ListItem>
+        <NavLink to={ROUTES.DASHBOARD}>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <Dashboard />
+              </ListItemIcon>
+              <ListItemText>Dashboard</ListItemText>
+            </ListItemButton>
+          </ListItem>
+        </NavLink>
 
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <Settings />
-            </ListItemIcon>
-            <ListItemText>Settings</ListItemText>
-          </ListItemButton>
-        </ListItem>
+        <NavLink to={ROUTES.SETTINGS}>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <Settings />
+              </ListItemIcon>
+              <ListItemText>Settings</ListItemText>
+            </ListItemButton>
+          </ListItem>
+        </NavLink>
       </List>
 
       <Divider />

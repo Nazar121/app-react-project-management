@@ -18,7 +18,9 @@ export const AccountLayout = () => {
       <div className={styles.main}>
         <AccountHeader toggleDrawer={toggleDrawer}></AccountHeader>
 
-        <Outlet></Outlet>
+        <div className={styles.outlet}>
+          <Outlet></Outlet>
+        </div>
       </div>
     </div>
   );

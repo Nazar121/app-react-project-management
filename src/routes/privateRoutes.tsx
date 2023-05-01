@@ -1,31 +1,34 @@
 import React from 'react';
-import { Routes, Route, RouteProps, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 // - Layouts
-import { AccountLayout } from '@layouts/index';
+import { AccountLayout, SettingsLayout } from '@layouts/index';
 
 // - Pages
-import { DashboardPage } from '@pages/index';
+import { DashboardPage, UserEmailPage, UserProfilePage, UserAccountPage } from '@pages/index';
 
 export const ROUTES_PRIVATE = {
   DASHBOARD: '/dashboard',
+  SETTINGS: '/settings',
+  USER_PROFILE: '',
+  USER_ACCOUNT: '',
+  USER_EMAIL: '',
 };
-
-const privateRoutes: RouteProps[] = [
-  {
-    path: ROUTES_PRIVATE.DASHBOARD,
-    element: <DashboardPage />,
-  },
-];
+ROUTES_PRIVATE.USER_PROFILE = `${ROUTES_PRIVATE?.SETTINGS}/profile`;
+ROUTES_PRIVATE.USER_ACCOUNT = `${ROUTES_PRIVATE?.SETTINGS}/account`;
+ROUTES_PRIVATE.USER_EMAIL = `${ROUTES_PRIVATE?.SETTINGS}/email`;
 
 export const PrivateRoutes = () => {
   return (
     <>
       <Routes>
         <Route path="/" element={<AccountLayout />}>
-          {privateRoutes.map((route: RouteProps) => (
-            <Route key={route.path} path={route.path} element={route.element} />
-          ))}
+          <Route path={ROUTES_PRIVATE.DASHBOARD} element={<DashboardPage />}></Route>
+          <Route path={ROUTES_PRIVATE.SETTINGS} element={<SettingsLayout />}>
+            <Route path={ROUTES_PRIVATE.USER_PROFILE} element={<UserProfilePage />}></Route>
+            <Route path={ROUTES_PRIVATE.USER_ACCOUNT} element={<UserAccountPage />}></Route>
+            <Route path={ROUTES_PRIVATE.USER_EMAIL} element={<UserEmailPage />}></Route>
+          </Route>
 
           <Route path="/" element={<Navigate to={ROUTES_PRIVATE.DASHBOARD} replace />} />
           <Route path="*" element={<Navigate to={ROUTES_PRIVATE.DASHBOARD} replace />} />
