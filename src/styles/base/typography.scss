@@ -1,0 +1,89 @@
+$h-desktop-list: (
+  h1: (
+    font-size: 2.125rem,
+  ),
+  h2: (
+    font-size: 1.875rem,
+  ),
+  h3: (
+    font-size: 1.5rem,
+  ),
+  h4: (
+    font-size: 1.25rem,
+  ),
+  h5: (
+    font-size: 1.125rem,
+  ),
+  h6: (
+    font-size: 1rem,
+  ),
+);
+
+$h-tablet-list: (
+  h1: (
+    font-size: 2.125rem,
+  ),
+  h2: (
+    font-size: 1.5rem,
+  ),
+  h3: (
+    font-size: 1.25rem,
+  ),
+  h4: (
+    font-size: 1.125rem,
+  ),
+  h5: (
+    font-size: 1rem,
+  ),
+  h6: (
+    font-size: 1rem,
+  ),
+);
+
+$h-mobile-list: (
+  h1: (
+    font-size: 1rem,
+  ),
+  h2: (
+    font-size: 1.067rem,
+  ),
+  h3: (
+    font-size: 1.083rem,
+  ),
+  h4: (
+    font-size: 1.125rem,
+  ),
+  h5: (
+    font-size: 1rem,
+  ),
+  h6: (
+    font-size: 1rem,
+  ),
+);
+
+@mixin h-build-list($list) {
+  @each $key, $val in $list {
+    // tag name like: h1 ...
+    #{$key} {
+      // property like: font-size ...
+      @each $keySecond, $valSecond in $val {
+        #{$keySecond}: #{$valSecond};
+      }
+
+      font-weight: 400;
+    }
+  }
+}
+
+// Desktop
+@include h-build-list($h-desktop-list);
+
+p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.error-text {
+  color: red;
+  margin: 15px 0;
+}

@@ -1,0 +1,25 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .icon {
+    font-size: 100px;
+  }
+
+  .title {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .text {
+    text-align: center;
+  }
+}
+
+.actions {
+  display: flex !important;
+  justify-content: center !important;
+  padding-bottom: 30px !important;
+}

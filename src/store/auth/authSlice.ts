@@ -35,6 +35,16 @@ export const loginUser = createAsyncThunk('auth/loginUser', async (data: AuthFor
   }
 });
 
+export const deleteAccountUser = createAsyncThunk('auth/deleteAccountUser', async (_, thunkAPI): Promise<any> => {
+  try {
+    const userCredential = await AuthService.deleteAccountUser();
+    return 'The account has been deleted';
+  } catch (error) {
+    const errorMessage = error instanceof FirebaseError ? error?.message : 'Error when deleting the account';
+    return thunkAPI.rejectWithValue(errorMessage);
+  }
+});
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -84,6 +94,22 @@ export const authSlice = createSlice({
         state.error = String(action.payload);
 
         AuthService.setAuthUserToLS(state.authUser);
+      });
+
+    builder
+      .addCase(deleteAccountUser.pending, (state, action: PayloadAction<unknown>) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteAccountUser.fulfilled, (state, action: PayloadAction<unknown>) => {
+        state.authUser = null;
+        state.isLoading = false;
+        state.error = '';
+
+        AuthService.logout();
+      })
+      .addCase(deleteAccountUser.rejected, (state, action: PayloadAction<unknown>) => {
+        state.isLoading = false;
+        state.error = String(action.payload);
       });
   },
 });

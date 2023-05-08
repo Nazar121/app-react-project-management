@@ -1,4 +1,4 @@
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, deleteUser } from 'firebase/auth';
 
 // - Interfaces
 import { AuthUser, AuthForm } from '@interfaces/auth';
@@ -24,6 +24,12 @@ const logout = () => {
   removeAuthUserFromLS();
 };
 
+const deleteAccountUser = async () => {
+  const auth = getAuth();
+  const user: any = auth?.currentUser;
+  return deleteUser(user);
+};
+
 const setAuthUserToLS = (authUser: AuthUser | null): void => {
   localStorage.setItem(AUTH_USER_KEY, JSON.stringify(authUser));
 };
@@ -41,6 +47,7 @@ export const AuthService = {
   registerUser,
   loginUser,
   logout,
+  deleteAccountUser,
   setAuthUserToLS,
   getAuthUserFromLS,
   removeAuthUserFromLS,

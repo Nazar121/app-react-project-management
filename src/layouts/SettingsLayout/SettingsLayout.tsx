@@ -3,21 +3,20 @@ import { NavLink, Outlet } from 'react-router-dom';
 import styles from './SettingsLayout.module.scss';
 
 // - NUI
-import { Divider, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
 import { Email, Person, Settings } from '@mui/icons-material';
 
 // - Routes
 import { ROUTES } from '@routes/index';
 
+// - Components
+import { SettingsTitle } from '@components/index';
+
 export const SettingsLayout = () => {
   return (
     <div className={styles.settings_layout}>
       <div className={styles.sidenav}>
-        <ListItemButton disableRipple>
-          <ListItemText>Settings</ListItemText>
-        </ListItemButton>
-
-        <Divider />
+        <SettingsTitle title="Settings"></SettingsTitle>
 
         <List>
           <NavLink to={ROUTES.USER_PROFILE}>
