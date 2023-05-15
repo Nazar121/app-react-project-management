@@ -6,3 +6,8 @@ export interface UsersStateStore {
 export interface UserUpdateEmailForm {
   email: string;
 }
+
+export interface UserUpdatePasswordForm {
+  password: string;
+  confirmPassword: string;
+}

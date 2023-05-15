@@ -4,7 +4,7 @@ import styles from './SettingsLayout.module.scss';
 
 // - NUI
 import { List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import { Email, Person, Settings } from '@mui/icons-material';
+import { Email, Person, Settings, Password } from '@mui/icons-material';
 
 // - Routes
 import { ROUTES } from '@routes/index';
@@ -43,6 +43,15 @@ export const SettingsLayout = () => {
                 <Email />
               </ListItemIcon>
               <ListItemText>Email</ListItemText>
+            </ListItemButton>
+          </NavLink>
+
+          <NavLink to={ROUTES.USER_PASSWORD}>
+            <ListItemButton>
+              <ListItemIcon>
+                <Password />
+              </ListItemIcon>
+              <ListItemText>Password</ListItemText>
             </ListItemButton>
           </NavLink>
         </List>

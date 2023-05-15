@@ -7,7 +7,7 @@ import { FirebaseError } from '@firebase/util';
 import { UsersService } from '@services/index';
 
 // - Interfaces
-import { UsersStateStore, UserUpdateEmailForm } from '@interfaces/users';
+import { UsersStateStore, UserUpdateEmailForm, UserUpdatePasswordForm } from '@interfaces/users';
 
 const initialState: UsersStateStore = {
   error: '',
@@ -19,7 +19,17 @@ export const updateUserEmail = createAsyncThunk('users/updateUserEmail', async (
     const res = await UsersService.updateUserEmail(data);
     return data?.email;
   } catch (error) {
-    const errorMessage = error instanceof FirebaseError ? error?.message : 'Error registration user';
+    const errorMessage = error instanceof FirebaseError ? error?.message : 'Error update user email';
+    return thunkAPI.rejectWithValue(errorMessage);
+  }
+});
+
+export const updateUserPassword = createAsyncThunk('users/updateUserPassword', async (data: UserUpdatePasswordForm, thunkAPI): Promise<any> => {
+  try {
+    const res = await UsersService.updateUserPassword(data);
+    return data?.password;
+  } catch (error) {
+    const errorMessage = error instanceof FirebaseError ? error?.message : 'Error update user password';
     return thunkAPI.rejectWithValue(errorMessage);
   }
 });
@@ -38,6 +48,19 @@ export const usersSlice = createSlice({
         state.error = '';
       })
       .addCase(updateUserEmail.rejected, (state, action: PayloadAction<unknown>) => {
+        state.isLoading = false;
+        state.error = String(action.payload);
+      });
+
+    builder
+      .addCase(updateUserPassword.pending, (state, action: PayloadAction<unknown>) => {
+        state.isLoading = true;
+      })
+      .addCase(updateUserPassword.fulfilled, (state, action: PayloadAction<unknown>) => {
+        state.isLoading = false;
+        state.error = '';
+      })
+      .addCase(updateUserPassword.rejected, (state, action: PayloadAction<unknown>) => {
         state.isLoading = false;
         state.error = String(action.payload);
       });
